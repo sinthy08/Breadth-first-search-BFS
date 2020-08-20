@@ -2,39 +2,21 @@
 using namespace std;
 
 int arr[10][10],var,source;
-
-
-void Bfs_Traverse()
-{
-
-    int i, j, Bfs_Queue[10], visited[10], front = -1, rear = 0;
-
-    for(j = 0 ; j < var ; j++)
-    {
-        visited[j] = 0;            //at first all visited vertex initialized to 0
-    }
-    cout<<"After BFS Traversal the graph: "<<endl;
-    Bfs_Queue[rear] = source;
-    visited[source] = 1;          // turning a visited vertex to 1(black vertex)
-
-    while( front != rear)
-    {
-        cout << Bfs_Queue[++front] << endl;
-        i = Bfs_Queue[front];
-        for(j = 0 ; j < var ; j++)
-        {
-            if(arr[i][j] != 0 && visited[j] != 1)
-            {
-              Bfs_Queue[++rear] = j;
-              visited[j] = 1;
-            }
-        }
-    }
-}
-
+void Bfs_Traverse();
+void Read_Input();
 
 int main()
 {
+    Read_Input();    
+    Bfs_Traverse();
+    
+    return 0;
+}
+
+
+void Read_Input ()
+{
+    
     int i, j;
     cout<<"Enter the number of vertices in the graph: ";
     cin>>var;
@@ -49,16 +31,47 @@ int main()
     cout << "Enter the source vertex: ";
     cin >> source;
 
-    Bfs_Traverse();
-
-
-    return 0;
+    
 }
 
-/*
+
+
+void Bfs_Traverse()
+{
+
+    int i, j, Bfs_Queue[10], visited[10], front = -1, rear = 0;
+    
+    for(j = 0 ; j < var ; j++)
+    {
+        visited[j] = 0;                                 //initializing all visited vertices to 0 
+    }
+    cout<<"After BFS Traversal the graph: "<<endl;
+    Bfs_Queue[rear] = source;
+    visited[source] = 1;                                //after visit the vertex is 1 
+    
+    while( front != rear)
+    {
+        cout << Bfs_Queue[++front] << endl;             //printing the black vertex in queue
+        i = Bfs_Queue[front];
+        for(j = 0 ; j < var ; j++)
+        {
+            if(arr[i][j] != 0 && visited[j] != 1)      //if vertex has an edge and not yet visited
+            {
+              Bfs_Queue[++rear] = j;
+              visited[j] = 1;
+            }
+        }
+    }
+}
+
+/* 
 0 1 1 0
 0 0 1 0
-1 0 0 1
+1 0 0 1 
 0 0 0 1
 result: 2 0 3 1
 */
+
+
+
+
